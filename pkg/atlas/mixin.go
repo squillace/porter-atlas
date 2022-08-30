@@ -1,4 +1,4 @@
-package skeletor
+package atlas
 
 import (
 	"get.porter.sh/porter/pkg/portercontext"

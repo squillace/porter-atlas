@@ -1,4 +1,4 @@
-package skeletor
+package atlas
 
 import (
 	"fmt"

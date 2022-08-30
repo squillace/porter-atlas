@@ -1,6 +1,6 @@
 # A Porter Mixin Skeleton
 
-[![Build Status](https://dev.azure.com/getporter/porter/_apis/build/status/skeletor?branchName=main)](https://dev.azure.com/getporter/porter/_build/latest?definitionId=13&branchName=main)
+[![Build Status](https://dev.azure.com/getporter/porter/_apis/build/status/atlas?branchName=main)](https://dev.azure.com/getporter/porter/_build/latest?definitionId=13&branchName=main)
 
 This repository contains the skeleton structure of a Porter Mixin. You can clone
 this repository and use it as a starting point to build new mixins. The
@@ -9,9 +9,9 @@ structure of this project matches closely with existing Porter [Mixins](https://
 1. Create a new repository in GitHub [using this repository as a
    template](https://help.github.com/en/articles/creating-a-repository-from-a-template).
 1. Go 1.17 or higher is required. You can choose to clone into the GOPATH or not according to preference.
-1. Rename the `cmd/skeletor` and `pkg/skeletor` directories to `cmd/YOURMIXIN` and
+1. Rename the `cmd/atlas` and `pkg/atlas` directories to `cmd/YOURMIXIN` and
    `pkg/YOURMIXIN`.
-1. Find any remaining `skeletor` text in the repository and replace it with `YOURMIXIN`.
+1. Find any remaining `atlas` text in the repository and replace it with `YOURMIXIN`.
 1. In `pkg/YOURMIXIN/version.go` replace `YOURNAME` with the name you would like displayed as the mixin
    author. This value is displayed as the author of your mixin when `porter mixins list` is run.
 1. Replace the `YOURNAME` instances in `pkg/YOURMIXIN/version_test.go` with the name used above.
@@ -29,7 +29,7 @@ would be to edit `build.go` to add the instructions to download the tool
 and you are all set. It will look and feel like the [gcloud](https://porter.sh/mixins/gcloud)
 or [aws](https://porter.sh/mixins/aws) mixins, both of which are built on top of the exec mixin.
 
-Edit the `Build` function in `pkg/skeletor/build.go`.
+Edit the `Build` function in `pkg/atlas/build.go`.
 Here you can add any Dockerfile lines that you require to download and install
 additional tools, configuration files, etc necessary for your mixin. The Build
 function should write the Dockerfile lines to `m.Out` which is a pipe from the
@@ -57,7 +57,7 @@ Once ready for primetime, don't forget to revisit this `README.md` and update/re
 
 ## Project Structure
 
-In the `cmd/skeletor` directory, you will find a cli built using [spf13/cobra](https://github.com/spf13/cobra). The CLI contains a go file for each basic capability a Mixin should implement:
+In the `cmd/atlas` directory, you will find a cli built using [spf13/cobra](https://github.com/spf13/cobra). The CLI contains a go file for each basic capability a Mixin should implement:
 
 * build
 * schema
@@ -67,7 +67,7 @@ In the `cmd/skeletor` directory, you will find a cli built using [spf13/cobra](h
 * invoke
 * uninstall
 
-Each of these command implementations have a corresponding Mixin implementation in the `pkg/skeletor` directory. Each of the commands above is wired into an empty implementation in `pkg/skeletor` that needs to be completed. In order to build a new Mixin, you need to complete these implementations with the relevant technology. For example, to build a [Cloud Formation](https://aws.amazon.com/cloudformation/) mixin, you might implement the methods in `pkg/skeletor` using the [AWS Go SDK](https://docs.aws.amazon.com/sdk-for-go/api/service/cloudformation/).
+Each of these command implementations have a corresponding Mixin implementation in the `pkg/atlas` directory. Each of the commands above is wired into an empty implementation in `pkg/atlas` that needs to be completed. In order to build a new Mixin, you need to complete these implementations with the relevant technology. For example, to build a [Cloud Formation](https://aws.amazon.com/cloudformation/) mixin, you might implement the methods in `pkg/atlas` using the [AWS Go SDK](https://docs.aws.amazon.com/sdk-for-go/api/service/cloudformation/).
 
 ## Provided capabilities
 
@@ -75,15 +75,15 @@ This skeleton mixin project brings some free capabilities:
 
 ### File System Access and Context
 
-Porter provides the [portercontext](https://porter.sh/src/pkg/portercontext) package that has helpful mechanisms for accessing the File System using [spf13/afero](https://github.com/spf13/afero). This makes it easy to provide mock File System implementations during testing. The portercontext package also provides a mechanism to encapsulate stdin, stdout and stderr so that they can easily be passed from `cmd/skeletor` code to implementing `pkg/skeletor` code.
+Porter provides the [portercontext](https://porter.sh/src/pkg/portercontext) package that has helpful mechanisms for accessing the File System using [spf13/afero](https://github.com/spf13/afero). This makes it easy to provide mock File System implementations during testing. The portercontext package also provides a mechanism to encapsulate stdin, stdout and stderr so that they can easily be passed from `cmd/atlas` code to implementing `pkg/atlas` code.
 
 ### Template and Static Asset Handling
 
-The project go:embed for dealing with static files, such as templates or other content that is best modeled outside of a Go file. You can see an example of this in `pkg/skeletor/schema.go`.
+The project go:embed for dealing with static files, such as templates or other content that is best modeled outside of a Go file. You can see an example of this in `pkg/atlas/schema.go`.
 
 ### Basic Schema
 
-The project provides an implementation of the `skeletor schema` command that is mostly functional. To fully implement this for your mixin, you simply need to provide a valid JSON schema. For reference, consult `pkg/skeletor/schema/schema.json`.
+The project provides an implementation of the `atlas schema` command that is mostly functional. To fully implement this for your mixin, you simply need to provide a valid JSON schema. For reference, consult `pkg/atlas/schema/schema.json`.
 
 ### Basic Tests
 

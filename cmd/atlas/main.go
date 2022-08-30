@@ -5,7 +5,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/getporter/skeletor/pkg/skeletor"
+	"github.com/getporter/atlas/pkg/atlas"
 	"github.com/spf13/cobra"
 )
 
@@ -22,13 +22,13 @@ func main() {
 }
 
 func buildRootCommand(in io.Reader) (*cobra.Command, error) {
-	m, err := skeletor.New()
+	m, err := atlas.New()
 	if err != nil {
 		return nil, err
 	}
 	m.In = in
 	cmd := &cobra.Command{
-		Use:  "skeletor",
+		Use:  "atlas",
 		Long: "A skeleton mixin to use for building other mixins for porter 👩🏽‍✈️",
 		PersistentPreRun: func(cmd *cobra.Command, args []string) {
 			// Enable swapping out stdout/stderr for testing
